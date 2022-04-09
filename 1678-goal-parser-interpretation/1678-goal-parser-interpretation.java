@@ -1,20 +1,20 @@
 class Solution {
     public String interpret(String com) {
-        String ans ="";
+        StringBuilder sb = new StringBuilder();
         for(int i=0;i<com.length();i++){
                 if(com.charAt(i)=='('){
                 if(com.charAt(i+1)==')'){
-                    ans+='o';
+                    sb.append('o');
                     i+=1;
                 }
                 else {
-                    ans+="al";
+                    sb.append("al");
                     i+=3;
                     }
                 }
-            else  ans+=com.charAt(i);
+            else  sb.append("G");
           
           }
-          return ans;
+          return sb.toString();
     }
 }
