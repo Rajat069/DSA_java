@@ -36,11 +36,16 @@ class Solution
     static char nonrepeatingCharacter(String S)
     {
        
+        String temp = "";
         for(int i=0;i<S.length();i++){
-            char t = S.charAt(i);
-            if(S.indexOf(t)==S.lastIndexOf(t))return S.charAt(i);
+            if(!temp.contains(S.charAt(i)+"")){
+                temp+=(S.charAt(i));
+                if(!S.substring(i+1).contains(S.charAt(i)+"")){
+                    return S.charAt(i);
+                }
             }
             
+        }
         return '$';
     }
 }
