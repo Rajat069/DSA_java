@@ -4,7 +4,10 @@ class Solution {
         for(int i=0;i<nums.length;i++){
             ans.add(index[i],nums[i]);
         }
-        int ar[] = ans.stream().mapToInt(i -> i).toArray();
+        int ar[] = new int[ans.size()];
+        for(int i=0;i<ar.length;i++){
+         ar[i]=ans.get(i);   
+        }
         return ar;
     }
 }
