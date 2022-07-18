@@ -19,6 +19,13 @@ class Solution {
                 anshead.next = l2;
                 l2=l2.next;
             }
+            else if(l1.val==l2.val){
+                 anshead.next = l1;
+                 l1=l1.next;
+                 anshead=anshead.next;
+                 anshead.next = l2;
+                 l2=l2.next;
+            }
             else{
                  anshead.next = l1;
                  l1=l1.next;
