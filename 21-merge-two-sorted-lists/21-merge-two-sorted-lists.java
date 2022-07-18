@@ -25,7 +25,16 @@ class Solution {
             }
           anshead=anshead.next;  
         }
-        anshead.next = l1!=null?l1:l2;
+        while(l1!=null){
+            anshead.next=l1;
+            l1=l1.next;
+            anshead=anshead.next;
+        }
+        while(l2!=null){
+            anshead.next=l2;
+            l2=l2.next;
+            anshead=anshead.next;
+        }
         return dummyhead.next;
     }
 }
