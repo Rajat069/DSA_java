@@ -24,17 +24,11 @@ class Solution {
                 carry+=dig2.val;
                 dig2=dig2.next;
             }
-            if(carry>9){
-                ListNode temp = new ListNode(carry%10);
-                pointer.next=temp;
-                carry/=10;
-            }
-            else {
-                ListNode temp = new ListNode(carry);
-                pointer.next=temp;
-                carry=0;
-            }
-            pointer=pointer.next;
+           
+             ListNode temp = new ListNode(carry%10);
+             pointer.next=temp;
+             carry/=10;
+             pointer=pointer.next;
         }
         return ansdig.next;
     }
