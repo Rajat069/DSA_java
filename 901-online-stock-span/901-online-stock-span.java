@@ -8,12 +8,7 @@ class StockSpanner {
     }
     
     public int next(int price) {
-        if(st.isEmpty()){
-            ar.add(price);
-            st.push(i++);
-            return 1;
-        }
-        else{
+    
                 while(!st.isEmpty()&&ar.get(st.peek())<=price){
                     st.pop();
                 }
@@ -22,7 +17,6 @@ class StockSpanner {
                 ar.add(price);
                 i++;
                 return ans;
-        }
     }
 }
 
