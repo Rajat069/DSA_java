@@ -10,8 +10,9 @@
  */
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
+        ListNode dummynode = new ListNode(-1);
+        ListNode ansnode = dummynode;
         ListNode temp = head;
-        ArrayList<Integer> ar = new ArrayList<>();
         while(temp!=null){
            int count = 0; 
            while(temp.next!=null&&temp.val==temp.next.val){
@@ -19,18 +20,12 @@ class Solution {
                count++;
            }
            if(count==0){
-               ar.add(temp.val);
+               ansnode.next=temp;
+               ansnode=ansnode.next;
            } 
            temp=temp.next;
         }
-        Collections.sort(ar);
-        ListNode dummynode = new ListNode(-1);
-        ListNode ansnode = dummynode;
-        int i=0;
-        while(i<ar.size()){
-            ansnode.next= new ListNode(ar.get(i++));
-            ansnode=ansnode.next;
-        }
+        ansnode.next=null;
         return dummynode.next;
     }
 }
