@@ -18,8 +18,12 @@ class Solution {
  
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String,Integer> entry : temp.entrySet()){
-            String st = entry.getKey().repeat(entry.getValue());;
-            sb.append(st);
+            StringBuilder t = new StringBuilder();
+            String char1 = entry.getKey();
+            for(int k=0;k<entry.getValue();k++){
+                t.append(char1);
+            }
+            sb.append(t.toString());
         }
         sb.reverse();
         return sb.toString();
