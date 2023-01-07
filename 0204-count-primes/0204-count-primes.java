@@ -5,22 +5,24 @@ class Solution {
        return 0;
       }
         boolean ar[] = new boolean[n];
+        Arrays.fill(ar,true);
         ar[0]=false;
         ar[1]=false;
-        Arrays.fill(ar,true);
         int count=0;
-        for(int i=2;i<ar.length;i++)
+        for(int i=2;i<=(int)Math.sqrt(n);i++)
         {
             if(ar[i])
             {
-                count++;
-                for(int j=2*i;j<ar.length;j+=i)
+                for(int j=i;j*i<ar.length;j++)
                 {
-                    ar[j]=false;
+                    ar[j*i]=false;
         
                 }
             }
 
+        }
+        for(int i=0;i<ar.length;i++){
+            if(ar[i])count++;
         }
         return count;
     }
