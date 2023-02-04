@@ -11,9 +11,7 @@ class Solution {
         }
         return ans_list;
     }
-    public int gcd(int a,int b){
-        if(a%b==0)return b;
-        else if(b%a==0)return a;
-        return gcd(a%b,b%a);
-    }
+    public int gcd(int a, int b) {
+    return b == 0 ? a : gcd(b, a % b);
+   }
 }
