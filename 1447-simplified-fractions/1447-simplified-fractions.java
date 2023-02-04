@@ -1,10 +1,10 @@
 class Solution {
     public List<String> simplifiedFractions(int n) {
         List<String> ans_list = new ArrayList<>();
-        for(int i=1;i<=n;i++){
-            for(int j=i+1;j<=n;j++){
+        for(int i=2;i<=n;i++){
+            for(int j=1;j<i;j++){
                 if(gcd(i,j)==1){
-                    String temp = i+"/"+j;
+                    String temp = j+"/"+i;
                     ans_list.add(temp);
                 }
             }
