@@ -11,11 +11,11 @@ class Solution {
           } 
         });
         int arrows=1;
-        int pre=0;
+        int pre=points[0][1];
         for(int i=1;i<points.length;i++){
-           if(points[i][0]>points[pre][1]){
+           if(points[i][0]>pre){
                arrows++;
-               pre=i;
+               pre=points[i][1];
            }
             
         }
