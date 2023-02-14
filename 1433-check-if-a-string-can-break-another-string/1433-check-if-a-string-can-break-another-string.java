@@ -12,6 +12,7 @@ class Solution {
             if(s1_ar[idx]>=s2_ar[idx])break_1++;
             if(s1_ar[idx]<=s2_ar[idx])break_2++;
             idx++;
+            if(break_1!=idx&&break_2!=idx)return false;
         }
         return break_1==len||break_2==len;
     }
