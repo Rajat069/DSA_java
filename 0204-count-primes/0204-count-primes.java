@@ -1,27 +1,21 @@
 class Solution {
     public int countPrimes(int n) {
-      if(n<2)
-      {
-       return 0;
-      }
         boolean ar[] = new boolean[n];
         Arrays.fill(ar,true);
-        ar[0]=false;
-        ar[1]=false;
         int count=0;
-        for(int i=2;i<=(int)Math.sqrt(n);i++)
+        for(int i=2;i*i<=n;i++)
         {
             if(ar[i])
             {
-                for(int j=i;j*i<ar.length;j++)
+                for(int j=i*2;j<n;j+=i)
                 {
-                    ar[j*i]=false;
+                    ar[j]=false;
         
                 }
             }
 
         }
-        for(int i=0;i<ar.length;i++){
+        for(int i=2;i<ar.length;i++){
             if(ar[i])count++;
         }
         return count;
