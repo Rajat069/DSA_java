@@ -1,22 +1,13 @@
 class Solution {
     public int maxProfit(int[] prices) {
-       int[] buy = new int[prices.length];
-       int[] sell = new int[prices.length];
-       int by=prices[0];
-       int sl=prices[prices.length-1];
-       for(int i=0;i<prices.length;i++){
-           by=Math.min(prices[i],by);
-           buy[i]=by;
-       }
-       for(int i=prices.length-1;i>=0;i--){
-           sl=Math.max(prices[i],sl);
-           sell[i]=sl;
-       }
-       System.out.println(Arrays.toString(sell));
-       int profit=0;
-       for(int i=0;i<prices.length;i++){
-           profit=Math.max(profit,Math.abs(sell[i]-buy[i]));
-       } 
-       return profit;
+        int profit=0;
+        int least_s=prices[0];
+        for(int i:prices){
+            if(least_s>i){
+                least_s=i;
+            }
+            profit=Math.max(i-least_s,profit);
+        }
+        return profit;
     }
 }
