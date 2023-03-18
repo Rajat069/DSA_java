@@ -1,16 +1,19 @@
 class Solution {
     public int[] singleNumber(int[] nums) {
-        HashMap<Integer,Integer> hm = new HashMap<>();
+        int xor=0;
         for(int i:nums){
-            hm.put(i,hm.getOrDefault(i,0)+1);
+            xor^=i;
         }
-        int[] ans = new int[2];
-        int idx=0;
-        for(int i:hm.keySet()){
-            if(hm.get(i)==1){
-                ans[idx++]=i;
+        xor&=-xor;
+        int xor1 = 0,xor2 = 0;
+        for(int i=0;i<nums.length;i++){
+            if((nums[i]&xor)==0){
+                xor1^=nums[i];
+            }
+            else{
+                xor2^=nums[i];
             }
         }
-        return ans;
+        return new int[]{xor1,xor2};
     }
 }
