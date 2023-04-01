@@ -35,8 +35,8 @@ class GfG
 	       sum+=A[i];
 	   }
 	   int max=st;
-	   for(int i=0;i<n-1;i++){
-	       int val =st+sum-(n*A[n-i-1]);
+	   for(int i=1;i<n;i++){
+	       int val =st+sum-(n*A[n-i]);
 	       max=Math.max(max,val);
 	       st=val;
 	   }
