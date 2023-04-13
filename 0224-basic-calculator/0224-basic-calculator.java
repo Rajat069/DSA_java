@@ -3,17 +3,15 @@ class Solution {
         Stack<Integer>brackets = new Stack<>();
         int sign=1,sol=0;
         for(int i=0;i<s.length();i++){
-            StringBuilder sb = new StringBuilder();
+            int curnum=0;
             boolean flag=false;
             while(i<s.length()&&Character.isDigit(s.charAt(i))){
-                sb.append(s.charAt(i));  
-                flag=true;
+                curnum=curnum*10+s.charAt(i)-'0';
                 i++;
+                flag=true;
             }
-            if(flag){
-              i--;
-              sol+=Integer.parseInt(sb.toString())*sign;   
-            }
+            sol+=curnum*sign;
+            if(flag)i--;
             if(s.charAt(i)=='('){
                 brackets.push(sol);
                 brackets.push(sign);
