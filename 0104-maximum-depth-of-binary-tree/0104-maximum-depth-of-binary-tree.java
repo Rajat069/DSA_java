@@ -15,24 +15,7 @@
  */
 class Solution {
     public int maxDepth(TreeNode root) {
-        return lvOrd(root);
-    }
-    public int lvOrd(TreeNode root){
         if(root==null)return 0;
-        Queue<TreeNode> q = new ArrayDeque<>();
-        int depth=0;
-        q.add(root);
-        while(!q.isEmpty()){
-            int size=q.size();
-            int idx=0;
-            while(idx<size){
-                TreeNode temp = q.poll();
-                if(temp.right!=null)q.add(temp.right);
-                if(temp.left!=null)q.add(temp.left);
-                idx++;
-            }
-            depth++;
-        }
-        return depth;
+        return Math.max(maxDepth(root.left),maxDepth(root.right))+1;
     }
 }
