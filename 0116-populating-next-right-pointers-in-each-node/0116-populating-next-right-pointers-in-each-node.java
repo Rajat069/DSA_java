@@ -23,7 +23,6 @@ class Node {
 
 class Solution {
     public Node connect(Node root) {
-        ArrayList<ArrayList<Node>>ar = new ArrayList<>();
         if(root==null)return null;
         Queue<Node> queue = new ArrayDeque<>();
         queue.add(root);
@@ -36,13 +35,11 @@ class Solution {
                 if(temp.left!=null)queue.add(temp.left);
                 if(temp.right!=null)queue.add(temp.right);
             }
-            ar.add(level);
-        }
-        for(ArrayList<Node>temp:ar){
-                for(int i=1;i<temp.size();i++){
-                   temp.get(i-1).next=temp.get(i);
+            for(int i=1;i<level.size();i++){
+                   level.get(i-1).next=level.get(i);
                 }
-              temp.get(temp.size()-1).next=null;
+              level.get(level.size()-1).next=null;
+          
         }
         return root;
     }
