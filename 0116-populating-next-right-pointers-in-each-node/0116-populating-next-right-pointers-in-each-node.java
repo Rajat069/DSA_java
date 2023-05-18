@@ -28,17 +28,14 @@ class Solution {
         queue.add(root);
         while(!queue.isEmpty()){
             int size=queue.size();
-            ArrayList<Node> level = new ArrayList<>();
+            Node prev=null;
             for(int i=0;i<size;i++){
                 Node temp = queue.poll();
-                level.add(temp);
-                if(temp.left!=null)queue.add(temp.left);
+                temp.next=prev;
+                prev=temp;
                 if(temp.right!=null)queue.add(temp.right);
+                if(temp.left!=null)queue.add(temp.left);
             }
-            for(int i=1;i<level.size();i++){
-                   level.get(i-1).next=level.get(i);
-                }
-              level.get(level.size()-1).next=null;
           
         }
         return root;
