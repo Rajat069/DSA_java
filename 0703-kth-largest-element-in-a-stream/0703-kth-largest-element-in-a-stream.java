@@ -1,17 +1,23 @@
 class KthLargest {
-    ArrayList<Integer>elem=new ArrayList<>();
-    int kth;
+    int k;
+    PriorityQueue<Integer> pQueue;
     public KthLargest(int k, int[] nums) {
+        pQueue=new PriorityQueue<Integer>();
+        this.k=k;
         for(int i=0;i<nums.length;i++){
-           elem.add(nums[i]);
+           pQueue.offer(nums[i]);
+           if(pQueue.size()>k){
+                pQueue.remove();
+           } 
         }
-        kth=k;
     }
     
     public int add(int val) {
-        elem.add(val);
-        Collections.sort(elem);
-        return elem.get(elem.size()-kth);
+        pQueue.add(val);
+        if(pQueue.size()>k){
+            pQueue.remove();
+        }
+        return pQueue.peek();
     }
 }
 
