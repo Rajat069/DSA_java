@@ -1,18 +1,22 @@
 class ParkingSystem {
-    int[] canPark = new int[3];
-    HashMap<Integer,Integer>hm=new HashMap<>();
+    int big,medium,small;
     public ParkingSystem(int big, int medium, int small) {
-         canPark[0]=big;
-         canPark[1]=medium;
-         canPark[2]=small;
-         for(int i=1;i<=3;i++){
-             hm.put(i,0);
-         }
+        this.big=big;
+        this.medium=medium;
+        this.small=small;
     }
     
     public boolean addCar(int carType) {
-        if(canPark[carType-1]>hm.get(carType)){
-            hm.put(carType,hm.get(carType)+1);
+        if(carType==1&&big>0){
+            big--;
+            return true;
+        }
+        else if(carType==2&&medium>0){
+            medium--;
+            return true;
+        }
+        else if(carType==3&&small>0){
+            small--;
             return true;
         }
         return false;
