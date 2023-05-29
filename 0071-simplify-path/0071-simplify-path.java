@@ -15,11 +15,11 @@ class Solution {
              }
              else st.push(sb.toString());
          }
-        StringBuilder sol = new StringBuilder("/");
+        if(st.isEmpty())return "/";
+        StringBuilder sol = new StringBuilder();
         for(String s:st){
-            sol.append(s+"/");
+            sol.append("/"+s);
         }
-        
-        return sol.length()!=1?sol.deleteCharAt(sol.length()-1).toString():sol.toString();
+        return sol.toString();
     }
 }
