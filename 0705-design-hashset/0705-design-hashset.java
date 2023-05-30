@@ -3,15 +3,16 @@ class MyHashSet {
     public MyHashSet() {
         ar=new ArrayList<>();
     }
-    
     public void add(int key) {
-        if(!ar.contains(key))ar.add(key);
+        ar.add(key);
     }
-    
-    public void remove(int key) {
-        if(ar.contains(key))ar.remove(Integer.valueOf(key));
+    public void remove(int key) {     
+        Iterator itr = ar.iterator();
+        while(itr.hasNext()){
+            int x=(int)itr.next();
+            if(x==key)itr.remove();
+        }
     }
-    
     public boolean contains(int key) {
         return ar.contains(key);
     }
