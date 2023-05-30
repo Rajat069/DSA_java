@@ -10,10 +10,10 @@ class MyHashMap {
             Pair<Integer,Integer>temp = ar.get(i);
             if(temp.getKey()==key){
                  ar.set(i,new Pair<Integer,Integer>(key,value));
-                 break;
+                 return;
             }
         }
-        if(i==ar.size())ar.add(new Pair<Integer,Integer>(key,value));
+        ar.add(new Pair<Integer,Integer>(key,value));
     }
     
     public int get(int key) {
