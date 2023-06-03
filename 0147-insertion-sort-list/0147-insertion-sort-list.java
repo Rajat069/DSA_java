@@ -17,15 +17,7 @@ class Solution {
             ar.add(temp);
             temp=temp.next;
         }
-        for(int i=1;i<ar.size();i++){
-           ListNode key = ar.get(i);
-           int j=i-1;
-           while(j>=0&&ar.get(j).val>key.val){
-               ar.set(j+1,ar.get(j));
-               j--;
-           }
-           ar.set(j+1,key); 
-        }
+        Collections.sort(ar,(a,b)->(a.val-b.val));
         ListNode dummy = new ListNode(-1);
         ListNode sol=dummy;
         int idx=0;
