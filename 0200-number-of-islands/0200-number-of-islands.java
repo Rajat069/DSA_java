@@ -3,9 +3,9 @@ class Solution {
         int no=0,n=grid.length,m=grid[0].length;
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                if(grid[i][j]=='1'){
+                if(grid[i][j]=='1'){ //each visit will set a valid island to '0'
                     visit(grid,i,j);
-                    no++;
+                    no++;  //counting each visit
                 }
             }
         }
