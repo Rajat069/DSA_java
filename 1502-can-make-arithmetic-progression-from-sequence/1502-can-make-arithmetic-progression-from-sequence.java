@@ -1,21 +1,10 @@
 class Solution {
     public boolean canMakeArithmeticProgression(int[] arr) {
-        int max=arr[0];
-        int min=arr[0];
-        for(int i:arr){
-            max=Math.max(max,i);
-            min=Math.min(min,i);
-        }
-        if(max==min)return true;
-        else{
-            int n=arr.length;
-            boolean seen[] = new boolean[n];
-            int d = (max-min)/(n-1);
-            if(d==0)return false;
-            for(int i:arr){
-                int pos=(i-min)/d;
-                if(pos>=n||seen[pos]||pos*d!=(i-min))return false;
-                seen[pos]=true;
+        Arrays.sort(arr);
+        int dif=arr[1]-arr[0];
+        for(int i=1;i<arr.length-1;i++){
+            if(dif!=arr[i+1]-arr[i]){
+                return false;
             }
         }
         return true;
