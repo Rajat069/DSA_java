@@ -9,38 +9,23 @@ class Solution {
         List<Integer> sol = new ArrayList<>();
         int wlen = words[0].length();
         int wcount = words.length;
-        HashMap<String, Integer> cpy = new HashMap<>();
         
-        for (int i = 0; i < wlen; i++) { // Start the loop from 0 to wlen-1
-            int left = i;
-            int right = i;
-            int count = 0; // Count the number of words matched in the window
-            
-            while (right + wlen <= s.length()) {
-                String nextWord = s.substring(right, right + wlen);
-                right += wlen;
-
-                if (hm.containsKey(nextWord)) {
-                    cpy.put(nextWord, cpy.getOrDefault(nextWord, 0) + 1);
-                    count++;
-
-                    while (cpy.get(nextWord) > hm.getOrDefault(nextWord, 0)) {
-                        String firstWord = s.substring(left, left + wlen);
-                        cpy.put(firstWord, cpy.get(firstWord) - 1);
-                        count--;
-                        left += wlen;
+        for (int i = 0; i < s.length()-wlen*wcount+1 ; i++) { // Start the loop from 0 to wlen-1      
+            HashMap<String, Integer> cpy = new HashMap<>(hm);
+            for(int j=0;j<wcount;j++){
+                String w=s.substring(i+j*wlen,i+j*wlen+wlen);
+                if(cpy.containsKey(w)){
+                    if(cpy.get(w)==1){
+                        cpy.remove(w);
                     }
-
-                    if (count == wcount) {
-                        sol.add(left);
-                    }
-                } else {
-                    cpy.clear();
-                    count = 0;
-                    left = right;
+                    else cpy.put(w,cpy.getOrDefault(w,0)-1);
+                    if(cpy.isEmpty()){
+                      sol.add(i);
+                      break;
+                   }
                 }
+                else break;
             }
-            cpy.clear(); // Clear the HashMap after each iteration of the outer loop
         }
         return sol;
     }
