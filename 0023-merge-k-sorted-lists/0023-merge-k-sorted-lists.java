@@ -21,13 +21,13 @@ class Solution {
     }
     public ListNode KmergeSort(Stack<ListNode>st){
       ListNode kmerged = new ListNode(-1);
-      while(st.size()>1){
+      while(st.size()>1){  //we pop 2 merge and push back in the stack lastly all we have left is a merged ll
           ListNode temp =mergeTwoLists(st.pop(),st.pop());
           st.push(temp);
       }
       return st.pop();  
     }
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) { //merging two sorted linked list into one
         ListNode dummy = new ListNode(0);
         ListNode current = dummy;
 
