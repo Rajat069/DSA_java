@@ -10,46 +10,20 @@
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        if(lists.length==0)return null;
-        if(lists.length==1)return lists[0];
-        Stack<ListNode> st = new Stack<>();
-        for(ListNode i:lists){
-            st.push(i);
-        }
-        return KmergeSort(st);
-        
-    }
-    public ListNode KmergeSort(Stack<ListNode>st){
-      ListNode kmerged = new ListNode(-1);
-      while(st.size()>1){  //we pop 2 merge and push back in the stack lastly all we have left is a merged ll
-          ListNode temp =mergeTwoLists(st.pop(),st.pop());
-          st.push(temp);
-      }
-      return st.pop();  
-    }
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) { //merging two sorted linked list into one
-        ListNode dummy = new ListNode(0);
-        ListNode current = dummy;
-
-        while (l1 != null && l2 != null) {
-            if (l1.val < l2.val) {
-                current.next = l1;
-                l1 = l1.next;
-            } else {
-                current.next = l2;
-                l2 = l2.next;
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((a,b)->a.val-b.val);
+        for(ListNode list:lists){
+            while(list!=null){
+                pq.offer(list);
+                list=list.next;
             }
-            current = current.next;
         }
-
-        if (l1 != null) {
-            current.next = l1;
+        ListNode mergedLists = new ListNode(-1);
+        ListNode sol = mergedLists;
+        while(!pq.isEmpty()){
+            sol.next=pq.poll();
+            sol=sol.next;
         }
-
-        if (l2 != null) {
-            current.next = l2;
-        }
-
-        return dummy.next;
+        sol.next=null;
+        return mergedLists.next;
     }
 }
