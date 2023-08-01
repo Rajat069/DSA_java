@@ -37,22 +37,10 @@ class Solution {
                 if(wc==1){
                     sol.add(sb.substring(0,sb.length()-1)+" ".repeat(tspace));
                 }
-                else if(tspace%(wc-1)==0){
-                StringBuilder sp = new StringBuilder();
-                String[]ar = sb.toString().split("1");
-                int wspace = tspace/(ar.length-1==0?1:ar.length-1);
-                for(String w:ar){
-                    sp.append(w);
-                    if(tspace>0)sp.append(" ".repeat(wspace));
-                    tspace-=wspace;
-                  }
-                 sol.add(sp.toString());
-                }   
                 else{
                 StringBuilder sp = new StringBuilder();
                 String[]ar = sb.toString().split("1");
-                int wspace = (tspace)/(ar.length-1==0?1:ar.length-1);
-                if(ar.length==2)wspace--;    
+                int wspace = tspace/(ar.length-1==0?1:ar.length-1);
                 int et=tspace%(ar.length-1);   
                 for(String w:ar){
                     sp.append(w);
