@@ -1,50 +1,51 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
 class Solution {
     public TreeNode balanceBST(TreeNode root) {
-        if(root==null)return root;
+        if (root == null) {
+            // If the root is null, the tree is already balanced.
+            return root;
+        }
+
+        // Step 1: Perform an inorder traversal to obtain a sorted array.
         inorder(root);
-        TreeNode balBST = null;
-        int f=0,l=ar.size()-1;
-        return helper(f,l);
-        
+
+        // Step 2: Use the sorted array to construct a balanced BST.
+        int f = 0; // First index of the sorted array.
+        int l = ar.size() - 1; // Last index of the sorted array.
+        return helper(f, l);
     }
-    private TreeNode helper(int low,int high){
-        if(low>high)return null;
-        int mid = low+(high-low)/2;
+
+    private TreeNode helper(int low, int high) {
+        // Base case: If low index is greater than high index, the range is invalid.
+        if (low > high) {
+            return null;
+        }
+
+        // Calculate the middle index of the current range.
+        int mid = low + (high - low) / 2;
+
+        // Create a new TreeNode with the value at the middle index.
         TreeNode node = new TreeNode(ar.get(mid));
-        node.left=helper(low,mid-1);
-        node.right=helper(mid+1,high);
+
+        // Recursively construct left and right subtrees using the left and right halves
+        // of the current range, respectively.
+        node.left = helper(low, mid - 1);
+        node.right = helper(mid + 1, high);
+
+        // Return the newly constructed TreeNode.
         return node;
     }
-    private TreeNode createBST(TreeNode root,int val){
-        if(root==null)return new TreeNode(val);
-        if(val>root.val){
-            root.right=createBST(root.right,val);
-        }
-        else{
-            root.left=createBST(root.left,val);
-        }
-        return root;
-    }
+
+    // An ArrayList to store elements of the binary tree in sorted order.
     ArrayList<Integer> ar = new ArrayList<>();
-    private void inorder(TreeNode root){
-        if(root==null){
+
+    private void inorder(TreeNode root) {
+        // Base case: If the current root is null, return.
+        if (root == null) {
             return;
         }
+
+        // Inorder traversal: Recursively visit the left subtree, add the current node's value
+        // to the ArrayList, and then recursively visit the right subtree.
         inorder(root.left);
         ar.add(root.val);
         inorder(root.right);
