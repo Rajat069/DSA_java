@@ -4,7 +4,7 @@ class Solution {
 
     public List<List<Integer>> permuteUnique(int[] nums) {
         for (int i : nums) {
-            hs.put(i, hs.getOrDefault(i, 0) + 1);
+            hs.put(i, hs.getOrDefault(i, 0) + 1); //use map to keep track of duplicate element frequency
         }
         helper(nums, new ArrayList<>());
         return sol;
@@ -22,7 +22,7 @@ class Solution {
                 temp.add(num);
                 hs.put(num, count - 1);
                 helper(nums, temp);
-                hs.put(num, count);
+                hs.put(num, count);  //while back tracking reinsert the org count
                 temp.remove(temp.size() - 1);
             }
         }
