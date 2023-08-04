@@ -10,14 +10,44 @@ class Solution {
             sol.add(new ArrayList<>(temp)); 
             return;
         }
-        if (sum > tar || idx == candidates.length) {
+        if (sum > tar || idx == candidates.length) { //sum > tar early exit!
             return;
         }
-         for(int i=idx;i<candidates.length;i++){
-         temp.add(candidates[i]);
+         for(int i=idx;i<candidates.length;i++){  //start from idx to avoid adding candidate[i] in other combintaion
+         temp.add(candidates[i]); 
          DFS(sum+candidates[i],tar,candidates,temp,i);
-         temp.remove(temp.size() - 1);      
+         temp.remove(temp.size() - 1); //backtracking removing element      
          }
     }
 
 }
+/*
+Target: 8
+
+           []
+       /   |   \
+     [2]  [3]   [5]    (Sum: 0)
+     /    /  \    \
+   [2,2] [2,3] [2,5]  (Sum: 2)
+   /      |
+[2,2,2]  [2,3,3]     (Sum: 4)
+   |        |
+[2,2,2,2]  [2,3,3]   (Sum: 6)
+            |
+         [2,3,3]      (Sum: 8) -> Added to the result
+         /
+   [2,3,3,3]           (Sum: 11) -> Exceeds the target (8), backtrack
+   /
+[2,3,3,3,3]           (Sum: 14) -> Exceeds the target (8), backtrack
+
+[2,3,3,5]             (Sum: 13) -> Exceeds the target (8), backtrack
+
+[2,5,5]               (Sum: 12) -> Exceeds the target (8), backtrack
+
+[3,3,3]               (Sum: 9) -> Exceeds the target (8), backtrack
+
+[3,5]                 (Sum: 8) -> Added to the result
+
+[5,5]                 (Sum: 10) -> Exceeds the target (8), backtrack
+
+*/
