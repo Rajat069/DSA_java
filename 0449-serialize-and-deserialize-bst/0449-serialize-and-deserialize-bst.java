@@ -10,34 +10,46 @@
 public class Codec {
 
     // Encodes a tree to a single string.
+    StringBuilder sb = new StringBuilder();
     public String serialize(TreeNode root) {
-        preOrder(root);
-        return sb.toString().substring(0,sb.length()-1);
+        if(root==null)return "";
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            TreeNode node = queue.poll();
+            if(node==null){
+                sb.append("N ");
+                continue;
+            }
+            sb.append(node.val+" ");
+            queue.add(node.left);
+            queue.add(node.right);
+        }
+        return sb.toString().trim();
     }
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        return helper(new ArrayDeque<String>(Arrays.asList(data.split(","))));
-    }
-    private TreeNode helper(Deque<String>data){
-        String elem = data.poll();
-        if(elem.equals("N")){
-            return null;
+        if(data=="")return null;
+        String[] splitData = data.split(" ");
+        Queue<TreeNode> queue = new LinkedList<>();
+        TreeNode parent = new TreeNode(Integer.parseInt(splitData[0]));
+        queue.add(parent);
+        for(int i=1;i<splitData.length;i++){
+            TreeNode node = queue.poll();
+            if(!splitData[i].equals("N")){
+                TreeNode left = new TreeNode(Integer.parseInt(splitData[i]));
+                node.left=left;
+                queue.add(left);
+            }
+            if(!splitData[++i].equals("N")){
+                TreeNode right = new TreeNode(Integer.parseInt(splitData[i]));
+                node.right=right;
+                queue.add(right);
+            }
         }
-        TreeNode root = new TreeNode(Integer.parseInt(elem));
-        root.left=helper(data);
-        root.right=helper(data);
-        return root;
-    }
-    private StringBuilder sb= new StringBuilder();
-    private void preOrder(TreeNode root){
-        if(root==null){
-            sb.append("N,");
-            return;
-        }
-        sb.append(root.val+",");
-        preOrder(root.left);
-        preOrder(root.right);
+        return parent;
+        
     }
 }
 
