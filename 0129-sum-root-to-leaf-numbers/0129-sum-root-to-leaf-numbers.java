@@ -26,7 +26,7 @@ class Solution {
       if(root==null){
           return;
       }
-      if(isLeaf(root)){
+      if(isLeaf(root)){ //if leaf then add the number to Digsum
           DigSum+=(Integer.parseInt(sb.toString()));
           return;
       }  
