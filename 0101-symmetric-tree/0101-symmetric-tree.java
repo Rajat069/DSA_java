@@ -15,11 +15,22 @@
  */
 class Solution {
     public boolean isSymmetric(TreeNode root) {
-          return isMirrorCopy(root,root);
+        if (root == null) {
+            return true;
+        }
+        return isMirrorCopy(root.left, root.right);
     }
-    public boolean isMirrorCopy(TreeNode root1,TreeNode root2){
-        if(root1==null&&root2==null)return true;
-        if(root1==null&&root2!=null||root1!=null&&root2==null||root1.val!=root2.val)return false;
-      return isMirrorCopy(root1.left,root2.right)&&isMirrorCopy(root1.right,root2.left);
+
+    private boolean isMirrorCopy(TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left == null || right == null) {
+            return false;
+        }
+        if (left.val != right.val) {
+            return false;
+        }
+        return isMirrorCopy(left.left, right.right) && isMirrorCopy(left.right, right.left);
     }
 }
