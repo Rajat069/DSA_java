@@ -16,23 +16,23 @@
 class Solution {
     private List<String> sol = new ArrayList<>();
     public List<String> binaryTreePaths(TreeNode root) {
-        helper(root,"");
+        helper(root,new StringBuilder());
         return sol;
     }
-    private void helper(TreeNode root,String cur){
+    private void helper(TreeNode root,StringBuilder sb){
         if(root==null){
             return;
         }
+        int len = sb.length();
+        sb.append(root.val);
         if(root.left==null&&root.right==null){
-            cur+=root.val;
-            sol.add(cur);
-            return;
+            sol.add(sb.toString());
         }
-        if(root.left!=null){
-            helper(root.left,cur+root.val+"->");
+        else{
+             sb.append("->");
+             helper(root.left,sb);
+             helper(root.right,sb);   
         }
-        if(root.right!=null){
-            helper(root.right,cur+root.val+"->");
-        }
+        sb.setLength(len);
     }
 }
