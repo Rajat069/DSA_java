@@ -15,24 +15,25 @@
  */
 class Solution {
     public String smallestFromLeaf(TreeNode root) {
-        StringMaker(root,(char)(root.val+'a')+"");
+        StringMaker(root,new StringBuilder());
         return sol;
     }
     String sol = "{}";
-    private void StringMaker(TreeNode root,String cur){
+    private void StringMaker(TreeNode root,StringBuilder cur){
         if(root==null){
            return;
         }
+        cur.append((char)(root.val+'a'));
         if(root.left==null&&root.right==null){
-            StringBuilder sb = new StringBuilder(cur);
-            sb.reverse();
-            String c = sb.toString();
+            cur.reverse();
+            String c = cur.toString();
+            cur.reverse();
             if(sol.compareTo(c)>=1){
                 sol=c;
             }
-            return;
         }
-        if(root.left!=null)StringMaker(root.left,cur+((char)(root.left.val+'a')));
-        if(root.right!=null)StringMaker(root.right,cur+((char)(root.right.val+'a')));
+        StringMaker(root.left,cur);
+        StringMaker(root.right,cur);
+        cur.deleteCharAt(cur.length()-1);
     }
 }
