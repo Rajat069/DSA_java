@@ -1,14 +1,14 @@
 class Solution {
     public int numTimesAllBlue(int[] flips) {
-        int sol=0,idx=0;
-        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b)->(b-a));
-        for(int i:flips){
-            pq.offer(i);
-            if(pq.peek()==idx+1){
-               sol++;
+        long curSum = 0;
+        long sol = 0;
+        for (int i = 0; i < flips.length; i++) {
+            curSum += flips[i];
+            long expectedSum = ((long) (i + 1) * (i + 2)) / 2; //sum of n natural no 
+            if (curSum == expectedSum) {
+                sol++;
             }
-            idx++;
         }
-        return sol;
+        return (int) sol; 
     }
 }
