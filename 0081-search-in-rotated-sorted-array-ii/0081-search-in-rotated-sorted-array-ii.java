@@ -4,7 +4,7 @@ class Solution {
         for(int i=1;i<nums.length;i++){
             if(nums[i]<nums[i-1]){
                pvt=i;
-                break;
+               break;
             }
         }
         boolean p1=binSearch(nums,0,pvt,target);
