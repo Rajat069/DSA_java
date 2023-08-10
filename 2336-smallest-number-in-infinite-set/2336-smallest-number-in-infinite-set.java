@@ -1,18 +1,19 @@
 class SmallestInfiniteSet {
     PriorityQueue<Integer>pq;
+    int curMin=1;
     public SmallestInfiniteSet() {
         pq=new PriorityQueue<>();
-        for(int i=1;i<=1000;i++){
-            pq.offer(i);
-        }
     }
     
     public int popSmallest() {
-        return pq.poll();
+        if(!pq.isEmpty()){
+            return pq.poll();
+        }
+        return curMin++;
     }
     
     public void addBack(int num) {
-          if(!pq.contains(num)){
+          if(!pq.contains(num)&&num<curMin){ //expensive
               pq.offer(num);
           }
     }
