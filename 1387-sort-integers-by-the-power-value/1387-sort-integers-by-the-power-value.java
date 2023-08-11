@@ -1,23 +1,33 @@
 class Solution {
-    int[] dp = new int[10000000];
+    HashMap<Integer,Integer> hm = new HashMap<>();
+    {
+        hm.put(1,0);
+    }
     public int getKth(int lo, int hi, int k) {
-        Integer[] ar = new Integer[hi-lo+1];
-        int[] sol = new int[hi-lo+1];
-        HashMap<Integer,Integer> hm = new HashMap<>();
-        int idx=0;
         for(int i=lo;i<=hi;i++){
-            ar[i-lo]=Integer.valueOf(i);
-            sol[idx++]=power(i);
-            hm.put(i,sol[idx-1]);
+             power(i);
         }
-        Arrays.sort(ar,(a,b)->{
-            return hm.get(a)-hm.get(b);
+        PriorityQueue<Integer>pq = new PriorityQueue<>((a,b)->{
+            int temp1 = hm.get(a);
+            int temp2 = hm.get(b);
+            if(temp1==temp2){
+                return a-b;
+            }
+            return temp1-temp2;
         });
-        return ar[k-1];
+        for(int i=lo;i<=hi;i++){
+            pq.offer(i);
+        }
+        int val=0;
+        while(!pq.isEmpty()&&k!=0){
+            val=pq.poll();
+            k--;
+        }
+        return val;
     }
     public int power(int n){
          if(n==1)return 0;
-         if(dp[n]!=0)return dp[n];
+         if(hm.containsKey(n))return hm.get(n);
          int oc=0,ev=0;
          if(n%2==1){
              oc=1+power(n*3+1);
@@ -25,7 +35,7 @@ class Solution {
          if(n%2==0){
              ev=1+power(n/2);
          }
-         dp[n]=ev+oc;
-         return dp[n];
+         hm.put(n,ev+oc);
+         return hm.get(n);
     }
 }
