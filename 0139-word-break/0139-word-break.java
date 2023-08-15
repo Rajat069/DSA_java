@@ -1,17 +1,25 @@
 class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
         HashSet<String> dict = new HashSet<>(wordDict);
-        boolean dp[] = new boolean[s.length() + 1];
-        dp[0] = true; // Empty string is always breakable
-        for (int i = 1; i <= s.length(); i++) {
-            for (int j = 0; j < i; j++) {
-                if (dp[j] && dict.contains(s.substring(j, i))) {
-                    dp[i] = true;
-                    break; // Break the inner loop if word is found
-                }
-            }
+        boolean dp[] = new boolean[s.length()];
+        return helper(0, s, dict, dp);
+    }
+
+    private boolean helper(int idx, String s, HashSet<String> dict, boolean[] dp) {
+        if (idx == s.length()) {
+            return true;
+        }
+        
+        if (dp[idx]) {
+            return false;
         }
 
-        return dp[s.length()];
+        for (int i = idx + 1; i <= s.length(); i++) {
+            if (dict.contains(s.substring(idx, i)) && helper(i, s, dict, dp)) {
+                return true;
+            }
+        }
+        dp[idx] = true; // Mark as visited
+        return false;
     }
 }
