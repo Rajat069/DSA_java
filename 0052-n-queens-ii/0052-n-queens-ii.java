@@ -15,11 +15,11 @@ class Solution {
             count++;
             return;
         }
-        for(int i=0;i<col;i++){
+        for(int i=0;i<col;i++){ //traversing collumn by collumn
             if(isSafe(row,i,board)){
                 board[row][i]='Q';
                 helper(col,board,row+1);
-                board[row][i]='.';   
+                board[row][i]='.';  //backtracking 
             }
         }
     }
@@ -27,11 +27,11 @@ class Solution {
         for(int i=0;i<row;i++){
             if(board[i][col]=='Q') return false;
         }
-        
+        //for left diagonal
         for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
             if(board[i][j]=='Q') return false; 
         }
-        
+        //for right diagonal
         for (int i = row - 1, j = col + 1; i >= 0 && j < board.length; i--, j++) {
             if (board[i][j]=='Q') return false;
         }
