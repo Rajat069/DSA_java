@@ -23,11 +23,13 @@ class Solution {
         }
         if(fresh==0)return 0;
         int[][]dir = {{1,0},{-1,0},{0,-1},{0,1}};
+        int maxTime=-1;
         while(!queue.isEmpty()){
             Node temp=queue.poll();
             int x=temp.i;
             int y=temp.j;
             int time=temp.time;
+            maxTime=Math.max(maxTime,time);
             sol[x][y]=time;
             for(int cd[]:dir){
                 int newr=cd[0]+x;
@@ -38,12 +40,6 @@ class Solution {
                     fresh--;
                 }
             }
-        }
-        int maxTime=-1;
-        for(int row[]:sol){
-          for(int c:row){
-              maxTime=Math.max(maxTime,c);
-           }
         }
         return fresh!=0?-1:maxTime;
     }
