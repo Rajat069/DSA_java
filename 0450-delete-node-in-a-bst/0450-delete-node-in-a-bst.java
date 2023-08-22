@@ -13,6 +13,7 @@
  *     }
  * }
  */
+//Method 2
 class Solution {
     public TreeNode deleteNode(TreeNode root, int key) {
         if(root==null)return null;
@@ -23,10 +24,10 @@ class Solution {
             root.right=deleteNode(root.right,key);
         }
         else{
-            if(root.right!=null&&root.left!=null){ //condition one the target node has 2 children here find max out of left subtree then set the current root value to max and run recursive code to delete max (the max will be with no child as with any subtree the max is always a leaf node)
-                int max = maxVAL(root.left);
-                root.val=max;
-                root.left=deleteNode(root.left,max);
+            if(root.right!=null&&root.left!=null){ //condition one the target node has 2 children here find min out of right subtree then set the current root value to min and run recursive code to delete min (the min will be with no child as with any subtree the min is always a leaf node)
+                int min = minVAL(root.right);
+                root.val=min;
+                root.right=deleteNode(root.right,min);
                 return root;
                 
             }//if only right node is there by pass current node and attacj right to parent
@@ -42,8 +43,8 @@ class Solution {
         }
         return root;
     }
-    public int maxVAL(TreeNode root){
-        if(root.right!=null)return maxVAL(root.right);
+    public int minVAL(TreeNode root){
+        if(root.left!=null)return minVAL(root.left);
         return root.val;
     }
     
