@@ -1,39 +1,43 @@
 class Solution {
-    public class pair{ //creating custom class for pair
-        int freq;
-        char c;
-        pair(char c,int freq){
-            this.c=c;
-            this.freq=freq;
-        }
-    }
     public String reorganizeString(String s) {
-        int[] freq = new int[26];
+        HashMap<Character,Integer> hs = new HashMap<>();
         for(char c:s.toCharArray()){
-            freq[c-'a']++;
+            hs.put(c,hs.getOrDefault(c,0)+1);
         }
-        PriorityQueue<pair>pq = new PriorityQueue<>((a,b)->(b.freq-a.freq)); //custom comparator that compare frequency
-        int idx=0;
-        for(int i:freq){
-            if(i>0){
-                pair t= new pair((char)(idx+'a'),i);
-                pq.add(t);
-            }
-            idx++;
+        PriorityQueue<Pair<Character,Integer>>pq = new PriorityQueue<>((a,b)->{
+            return b.getValue()-a.getValue();
+        });
+        for(char c:hs.keySet()){
+            int freq=hs.get(c);
+            Pair<Character,Integer>pair = new Pair<>(c,freq);
+            pq.offer(pair);
         }
-        StringBuilder sb= new StringBuilder();
-        pair block=pq.poll();  //remove and append the highest freq char
-        sb.append(block.c);
-        block.freq--;  //decrease freq
+        StringBuilder sb = new StringBuilder();
+        char block='*';
         while(!pq.isEmpty()){
-            pair pr = pq.poll();
-            sb.append(pr.c);
-            pr.freq--;
-            if(block.freq>0){  //if blocked character still has frequency left
-                pq.add(block);
+            Pair<Character,Integer>pair=pq.poll();
+            char ap=pair.getKey();
+            boolean f=false;
+            if(pair.getKey()==block){
+                if(pq.isEmpty())return "";
+                Pair<Character,Integer>pair2=pq.poll();
+                ap=pair2.getKey();
+                if(pair2.getValue()>1){
+                    pair2=new Pair<>(pair2.getKey(),pair2.getValue()-1);
+                    pq.offer(pair2);   
+                }
+                f=true;
             }
-            block=pr;//update blocking char to recently appended one
-        }
-        return block.freq>0?"":sb.toString();
-    }
+            sb.append(ap);
+            block=ap;
+            if(f){
+                pq.offer(pair);
+            }
+            else if(pair.getValue()>1){
+                    pair=new Pair<>(pair.getKey(),pair.getValue()-1);
+                    pq.offer(pair);   
+            }
+       }
+        return sb.toString();
+    } 
 }
