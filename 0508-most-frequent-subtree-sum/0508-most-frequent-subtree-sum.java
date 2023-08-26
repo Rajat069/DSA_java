@@ -16,7 +16,7 @@
 class Solution {
     HashMap<Integer,Integer>hm = new HashMap<>();
     public int[] findFrequentTreeSum(TreeNode root) {
-        helper(root);
+        subtreesum(root);
         PriorityQueue<Pair<Integer,Integer>>pq = new PriorityQueue<>((a,b)->{
             return b.getValue()-a.getValue();
         });
@@ -39,17 +39,10 @@ class Solution {
         }
         return sol;
     }
-    private void helper(TreeNode root){
-        if(root==null){
-            return;
-        }
-        int s=subtreesum(root);
-        hm.put(s,hm.getOrDefault(s,0)+1);
-        helper(root.left);
-        helper(root.right);
-    }
     private int subtreesum(TreeNode root){
         if(root==null)return 0;
-        return root.val+subtreesum(root.left)+subtreesum(root.right);
+        int val=root.val+subtreesum(root.left)+subtreesum(root.right);
+        hm.put(val,hm.getOrDefault(val,0)+1);
+        return val;
     }
 }
