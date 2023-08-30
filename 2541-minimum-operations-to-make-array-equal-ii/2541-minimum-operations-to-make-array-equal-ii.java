@@ -21,6 +21,6 @@ class Solution {
                 else return -1;
             }
         }
-        return Math.abs(inc-dec)>1?-1:inc>dec?inc:dec;
+        return Math.abs(inc-dec)!=0?-1:inc>dec?inc:dec;
     }
 }
