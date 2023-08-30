@@ -14,24 +14,22 @@
  * }
  */
 class Solution {
+    int leftM;
+    int Glevel=0;
     public int findBottomLeftValue(TreeNode root) {
-        if(root.left==null&&root.right==null)return root.val;
-        int val=-1;
-        Queue<TreeNode>queue = new ArrayDeque<>();
-        queue.offer(root);
-        while(!queue.isEmpty()){
-            int size=queue.size();
-            for(int i=0;i<size;i++){
-                  TreeNode temp = queue.poll();
-                  if(i==0)val=temp.val;
-                  if(temp.left!=null){
-                      queue.offer(temp.left);
-                  }
-                  if(temp.right!=null){
-                      queue.offer(temp.right);
-                  }
-            }
+        if(root.left==null&&root.right==null){
+            return root.val;
         }
-        return val;
+        DFS(root,0);
+        return leftM;
+    }
+    private void DFS(TreeNode root,int level){
+       if(root==null)return;
+       if(level>Glevel){
+           leftM=root.val;
+           Glevel=level;
+       }
+       if(root.left!=null)DFS(root.left,level+1);
+       if(root.right!=null)DFS(root.right,level+1); 
     }
 }
