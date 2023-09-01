@@ -1,8 +1,8 @@
 class Solution {
     public int minimizeMax(int[] nums, int p) {
         if(p==0)return 0;
-        int f=0,l=1000000000;
         Arrays.sort(nums);
+        int f=0,l=nums[nums.length-1]-nums[0];
         while(f<=l){
             int mid = f+(l-f)/2;
             int count=0;
