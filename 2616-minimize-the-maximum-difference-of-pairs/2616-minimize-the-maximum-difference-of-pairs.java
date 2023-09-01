@@ -5,13 +5,14 @@ class Solution {
         int f=0,l=nums[nums.length-1]-nums[0];
         while(f<=l){
             int mid = f+(l-f)/2;
-            int count=0;
-            for(int i=1;i<nums.length;i++){
+            int count=0,i=1;
+            while(i<nums.length){
                 if(nums[i]-nums[i-1]<=mid){
                     i++;
                     count++;
                 }
                 if(count==p)break;
+                i++;
             }
             if(count==p){
                 l=mid-1;
