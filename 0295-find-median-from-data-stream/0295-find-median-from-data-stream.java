@@ -24,13 +24,8 @@ class MedianFinder {
     }
     
     public double findMedian() {
-        if(pq2.isEmpty()){
-            return pq1.peek();
-        }
-        else{
-            if(pq1.size()==pq2.size())return (pq1.peek()+pq2.peek())/2.0;
-            else return pq1.peek();
-        }
+        if(pq1.size()==pq2.size())return (pq1.peek()+pq2.peek())/2.0;
+        else return pq1.peek();
     }
 }
 
