@@ -1,42 +1,53 @@
-import java.util.*;
-
 class FreqStack {
-    Map<Integer, Integer> freqMap;
-    PriorityQueue<Pair<Integer, Pair<Integer, Integer>>> maxHeap;
-    int sequence;
-
+    HashMap<Integer,Integer>hm;
+    PriorityQueue<elem>pq;
+    int c=0;
+    class elem{
+     int val;
+     int freq;
+     int idx;
+     public elem(int val,int freq,int idx){
+        this.val=val;
+        this.freq=freq;
+        this.idx=idx;
+      }
+    }
     public FreqStack() {
-        freqMap = new HashMap<>();
-        maxHeap = new PriorityQueue<>((a, b) -> {
-            int freqA = a.getValue().getKey();
-            int freqB = b.getValue().getKey();
-            int seqA = a.getValue().getValue();
-            int seqB = b.getValue().getValue();
-
-            if (freqA != freqB) {
-                return freqB - freqA; // Sort by frequency (highest first)
-            } else {
-                return seqB - seqA; // If frequencies are equal, sort by sequence (highest first)
-            }
-        });
-        sequence = 0;
+       hm= new HashMap<>();
+       pq=new PriorityQueue<>((a,b)->{
+           int f1=a.freq;
+           int f2=b.freq;
+           int order1=a.idx;
+           int order2=b.idx;
+           if(f1==f2){
+               return order2-order1; 
+           }
+           return f2-f1;
+       });
     }
-
+    
     public void push(int val) {
-        int freq = freqMap.getOrDefault(val, 0) + 1;
-        freqMap.put(val, freq);
-        maxHeap.offer(new Pair<>(val, new Pair<>(freq, sequence++)));
+        int v = hm.getOrDefault(val,0)+1;
+        elem obj = new elem(val,v,c++);
+        pq.offer(obj);
+        hm.put(val,v);
     }
-
+    
     public int pop() {
-        Pair<Integer, Pair<Integer, Integer>> pair = maxHeap.poll();
-        int val = pair.getKey();
-        int freq = pair.getValue().getKey();
-        if (freqMap.get(val) == 1) {
-            freqMap.remove(val);
-        } else {
-            freqMap.put(val, freq - 1);
+        elem topF=pq.poll();
+        if(hm.get(topF.val)==1){
+            hm.remove(topF.val);
         }
-        return val;
+        else{
+            hm.put(topF.val,hm.get(topF.val)-1);
+        }
+        return topF.val;
     }
 }
+
+/**
+ * Your FreqStack object will be instantiated and called as such:
+ * FreqStack obj = new FreqStack();
+ * obj.push(val);
+ * int param_2 = obj.pop();
+ */
