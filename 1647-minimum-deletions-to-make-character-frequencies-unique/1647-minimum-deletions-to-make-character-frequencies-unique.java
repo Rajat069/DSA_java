@@ -1,16 +1,12 @@
 class Solution {
     public int minDeletions(String s) {
-        HashMap<Character,Integer>hm = new HashMap<>();
+        int[]freq = new int[26];
         for(char c:s.toCharArray()){
-            hm.put(c,hm.getOrDefault(c,0)+1);
+            freq[c-'a']++;
         }
         HashSet<Integer>hs = new HashSet<>();
-        ArrayList<Integer>val = new ArrayList<>();
-        for(int i:hm.values()){
-            val.add(i);
-        }
         int minDel=0;
-        for(int v:val){
+        for(int v:freq){
             int vv=v;
             while(vv>0&&hs.contains(vv)){
                 vv--;
