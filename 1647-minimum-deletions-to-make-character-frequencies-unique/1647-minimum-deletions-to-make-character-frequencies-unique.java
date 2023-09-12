@@ -10,7 +10,6 @@ class Solution {
             val.add(i);
         }
         int minDel=0;
-        Collections.sort(val,Collections.reverseOrder());
         for(int v:val){
             int vv=v;
             while(vv>0&&hs.contains(vv)){
