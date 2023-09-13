@@ -11,8 +11,7 @@
  * 5. After calculating both 'left' and 'right' arrays, we iterate through the array and calculate the maximum candies each child should receive.
  * 6. The total minimum candies required will be the sum of the maximum candies from both 'left' and 'right' arrays for each child.
  *
- * Note: While this approach works for most cases, there can be situations where simultaneously checking both 'left' and 'right' fails to distribute
- * the candies optimally, leading to extra candies being given. This can happen when the ratings form a pattern like [1, 2, 1, 2, 1, 2].
+ * Note:There can be situations where simultaneously checking both 'left' and 'right' fails to distribute the candies optimally, leading to extra candies being given. This can happen when the ratings form a pattern like [1, 2, 1, 2, 1, 2].
  *
  * Test Case:
  * Input: ratings = [1, 2, 1, 2, 1, 2]
