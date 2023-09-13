@@ -28,13 +28,11 @@ class Solution {
                  adj++;
              }
              else{
-                 adj=0;
-             }
-             if(adj==k){
-                 count++;
+                 count+=(adj/k);
                  adj=0;
              }
         }
+        count+=(adj/k);
         return count>=m;
     }
 }
