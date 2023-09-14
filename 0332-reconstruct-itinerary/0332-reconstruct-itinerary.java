@@ -4,14 +4,14 @@ class Solution {
         for(List<String> ticket : tickets){
             graph.computeIfAbsent(ticket.get(0), k -> new PriorityQueue<>()).add(ticket.get(1));
         }
-        LinkedList<String> stack = new LinkedList<>();
+        Stack<String>stack = new Stack<>();
         stack.add("JFK");
-        LinkedList<String> itinerary = new LinkedList<>();
+        LinkedList<String>itinerary = new LinkedList<>();
         while (!stack.isEmpty()) {
-            while(graph.getOrDefault(stack.peekLast(),new PriorityQueue<>()).size()>0) {
-                stack.add(graph.get(stack.peekLast()).poll());
+            while(graph.getOrDefault(stack.peek(),new PriorityQueue<>()).size()>0) {
+                stack.add(graph.get(stack.peek()).poll());
             }
-            itinerary.addFirst(stack.pollLast());
+            itinerary.addFirst(stack.pop());
         }
         return itinerary;
     }
