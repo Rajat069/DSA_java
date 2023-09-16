@@ -7,6 +7,9 @@ class Solution {
     private int helper(int n,int[]dp){
         if(n<=1)return n;
         if(dp[n]>0)return dp[n];
-        return dp[n]=fib(n-1)+fib(n-2);
+        int num1=helper(n-1,dp);
+        int num2=helper(n-2,dp);
+        int sum=num1+num2;
+        return dp[n]=sum;
     }
 }
