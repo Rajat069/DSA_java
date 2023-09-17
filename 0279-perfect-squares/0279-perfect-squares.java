@@ -1,11 +1,11 @@
 class Solution {
     public int numSquares(int n) {
-         ArrayList<Integer>ar = new ArrayList<>();
-         for(int i=1;i<=n;i++){
-             if(Math.sqrt(i) == (int)Math.sqrt(i)){
-                 ar.add(i);
-             }
-         }
+        ArrayList<Integer>ar = new ArrayList<>();
+        int num=1; 
+        while(num*num<=n){
+            ar.add(num*num);
+            num++;
+        }
         int[]dp = new int[n+1];
         return helper(ar,n,dp);
     }
