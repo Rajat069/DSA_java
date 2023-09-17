@@ -15,16 +15,9 @@ class Solution {
         ListNode dummyhead  = new ListNode(0);
         ListNode anshead = dummyhead;
         while(l1!=null&&l2!=null){
-            if(l1.val>l2.val){
+            if(l1.val>=l2.val){
                 anshead.next = l2;
                 l2=l2.next;
-            }
-            else if(l1.val==l2.val){
-                 anshead.next = l1;
-                 l1=l1.next;
-                 anshead=anshead.next;
-                 anshead.next = l2;
-                 l2=l2.next;
             }
             else{
                  anshead.next = l1;
