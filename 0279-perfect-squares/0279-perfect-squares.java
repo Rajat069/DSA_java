@@ -7,7 +7,6 @@ class Solution {
              }
          }
         int[]dp = new int[n+1];
-        Arrays.fill(dp,-1);
         return helper(ar,n,dp);
     }
     private int helper(ArrayList<Integer>ar,int num,int[]dp){
@@ -18,7 +17,7 @@ class Solution {
         for(int i=0;i<ar.size();i++){
             if(num-ar.get(i)>=0){
                 int sub=0;
-                if(dp[num-ar.get(i)]!=-1){
+                if(dp[num-ar.get(i)]!=0){
                     sub=dp[num-ar.get(i)];
                 }
                 else sub=helper(ar,num-ar.get(i),dp);
