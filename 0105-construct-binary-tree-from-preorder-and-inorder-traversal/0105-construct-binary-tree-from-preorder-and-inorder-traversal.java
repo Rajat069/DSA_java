@@ -14,7 +14,11 @@
  * }
  */
 class Solution {
+    HashMap<Integer,Integer>hm = new HashMap<>();
     public TreeNode buildTree(int[] preorder, int[] inorder) {
+        for(int i=0;i<inorder.length;i++){
+            hm.put(inorder[i],i);
+        }
         return helper(preorder,inorder,0,0,inorder.length-1);
     }
     private TreeNode helper(int[]preorder,int[]inorder,int pidx,int ins,int ine){
@@ -23,17 +27,9 @@ class Solution {
          }
          int elem=preorder[pidx++];
          TreeNode root= new TreeNode(elem);
-         int pos=posf(inorder,elem);
+         int pos=hm.get(elem);
          root.left=helper(preorder,inorder,pidx,ins,pos-1);
          root.right=helper(preorder,inorder,pidx+pos-ins,pos+1,ine);
          return root;
-    }
-    private int posf(int[]inorder,int elem){
-        for(int i=0;i<inorder.length;i++){
-              if(inorder[i]==elem){
-                  return i;
-              }
-        }
-        return -1;
     }
 }
