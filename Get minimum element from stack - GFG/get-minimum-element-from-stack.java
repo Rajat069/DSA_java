@@ -1,4 +1,4 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 import java.util.*;
 
 
@@ -42,54 +42,43 @@ class Get_Min_From_Stack
 }
 
 
+
 // } Driver Code Ends
 
 
 class GfG
 {
-    int min;
-    Stack<Integer> s = new Stack<>();
-
+    PriorityQueue<Integer>pq = new PriorityQueue<>();
+    Stack<Integer> st;
+    
+    // Constructor    
+    GfG()
+	{
+	    st=new Stack<>();
+	}
+	
     /*returns min element from stack*/
     int getMin()
     {
-        if(s.size()==0){
-            return -1;
-        }
-	    else return min;
+       return pq.isEmpty()?-1:pq.peek();
     }
     
     /*returns poped element from stack*/
     int pop()
     {
-      if(s.isEmpty()){
+        if(st.isEmpty()){
             return -1;
         }
-	  else if(s.peek()<min){
-	      int or = min;
-	      min = 2*min-s.pop();
-	      return or;
-	  }
-	  else{
-	      return s.pop();
-	  }
+        int val=st.pop();
+        pq.remove(val);
+        return val;
     }
 
     /*push element x into the stack*/
     void push(int x)
     {
-      if(s.isEmpty()){
-          s.push(x);
-          min=x;
-      }
-	  else if(x<min){
-	        s.push(2*x-min);
-	        min=x;
-	      
-	  }
-	  else s.push(x);
-	    
-	  
+	   pq.offer(x);
+	   st.push(x);
     }	
 }
 
