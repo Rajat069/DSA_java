@@ -1,31 +1,29 @@
 class Solution {
     public String frequencySort(String s) {
-        HashMap<String,Integer> hm = new HashMap<>();
-        for(char c:s.toCharArray()){
-            if(!hm.containsKey(c+""))hm.put(c+"",1);
-            else hm.put(c+"",hm.get(c+"")+1);
-        }
-       HashMap<String, Integer> temp
-            = hm.entrySet()
-                  .stream()
-                  .sorted((i1, i2)
-                              -> i1.getValue().compareTo(
-                                  i2.getValue()))
-                  .collect(Collectors.toMap(
-                      Map.Entry::getKey,
-                      Map.Entry::getValue,
-                      (e1, e2) -> e1, LinkedHashMap::new));
- 
-        StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String,Integer> entry : temp.entrySet()){
-            StringBuilder t = new StringBuilder();
-            String char1 = entry.getKey();
-            for(int k=0;k<entry.getValue();k++){
-                t.append(char1);
+        PriorityQueue<Pair<Character,Integer>>pq = new PriorityQueue<>((a,b)->{
+            if(a.getValue()==b.getValue()){
+                return a.getKey()-b.getKey();
             }
-            sb.append(t.toString());
+            else return b.getValue()-a.getValue();
+        });
+        HashMap<Character,Integer>hm=new HashMap<>();
+        for(char c:s.toCharArray()){
+            hm.put(c,hm.getOrDefault(c,0)+1);
         }
-        sb.reverse();
+        for(char c:hm.keySet()){
+            Pair<Character,Integer>pairr=new Pair<>(c,hm.get(c));
+            pq.offer(pairr);
+        }
+        StringBuilder sb = new StringBuilder();
+        while(!pq.isEmpty()){
+            Pair<Character,Integer>temp=pq.poll();
+            String ss=temp.getKey()+"";
+            StringBuilder word = new StringBuilder();
+            for(int i=0;i<temp.getValue();i++){
+               word.append(ss);
+            }
+            sb.append(word.toString());
+        }
         return sb.toString();
     }
 }
