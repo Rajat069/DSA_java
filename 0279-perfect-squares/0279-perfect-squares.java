@@ -9,9 +9,9 @@ class Solution {
         int[]dp = new int[n+1];
         return helper(ar,n,dp);
     }
-    private int helper(ArrayList<Integer>ar,int num,int[]dp){
+    private int helper(ArrayList<Integer>ar,int num,int[]dp){ //coin change dp of finding minimum ways to make something
         if(num==0){
-              return 0; 
+            return 0; 
         }
         int count=Integer.MAX_VALUE;
         for(int i=0;i<ar.size();i++){
