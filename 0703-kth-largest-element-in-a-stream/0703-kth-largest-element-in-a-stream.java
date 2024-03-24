@@ -4,11 +4,8 @@ class KthLargest {
     public KthLargest(int k, int[] nums) {
         pQueue=new PriorityQueue<Integer>();
         this.k=k;
-        for(int i=0;i<nums.length;i++){
-           pQueue.offer(nums[i]);
-           if(pQueue.size()>k){
-                pQueue.remove();
-           } 
+        for(int i:nums){
+            add(i);
         }
     }
     
